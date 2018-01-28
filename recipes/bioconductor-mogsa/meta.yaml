@@ -1,0 +1,49 @@
+{% set version = "1.12.2" %}
+{% set name = "mogsa" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name }}/bioconductor-{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: 7501501da38359fe331653326510b82626e5a2d3ec0af86c017993a964c24928
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-biobase
+    - bioconductor-biocgenerics
+    - bioconductor-genefilter
+    - bioconductor-graphite
+    - bioconductor-gseabase
+    - r-base
+    - r-cluster
+    - r-corpcor
+    - r-gplots
+    - r-svd
+  run:
+    - bioconductor-biobase
+    - bioconductor-biocgenerics
+    - bioconductor-genefilter
+    - bioconductor-graphite
+    - bioconductor-gseabase
+    - r-base
+    - r-cluster
+    - r-corpcor
+    - r-gplots
+    - r-svd
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: GPL-2
+  summary: 'This package provide a method for doing gene set analysis based on multiple omics data.'
