@@ -1,0 +1,39 @@
+{% set version = "1.44.0" %}
+{% set name = "rHVDM" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
+  sha256: ff6d1340196993bc4a98d7d43f26164b1b4ee340bc57ff1a3a0363827b9884e3
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - 'bioconductor-affy >=1.23.4'
+    - 'bioconductor-biobase >=2.5.5'
+    - r-base
+    - 'r-minpack.lm >=1.0-5'
+    - 'r-r2html >=1.5'
+  run:
+    - 'bioconductor-affy >=1.23.4'
+    - 'bioconductor-biobase >=2.5.5'
+    - r-base
+    - 'r-minpack.lm >=1.0-5'
+    - 'r-r2html >=1.5'
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: GPL-2
+  summary: 'A R implementation of HVDM (Genome Biol 2006, V7(3) R25)'
