@@ -1,0 +1,87 @@
+{% set version = "3.6.0" %}
+{% set name = "TPP" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
+  sha256: 2936c8d9e21f0dfb7255cf695f3b56723725c4e66694442d66cb076c1d3daabe
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-biobase
+    - bioconductor-biobroom
+    - bioconductor-limma
+    - r-base
+    - r-broom
+    - r-data.table
+    - r-doparallel
+    - r-dplyr
+    - r-foreach
+    - r-futile.logger
+    - r-ggplot2
+    - r-gridextra
+    - r-knitr
+    - r-magrittr
+    - r-mass
+    - r-mefa
+    - r-nls2
+    - 'r-openxlsx >=2.4.0'
+    - r-plyr
+    - r-purrr
+    - r-rcolorbrewer
+    - r-rcurl
+    - r-reshape2
+    - r-rmarkdown
+    - r-sme
+    - r-stringr
+    - r-tidyr
+    - r-venndiagram
+    - r-vgam
+  run:
+    - bioconductor-biobase
+    - bioconductor-biobroom
+    - bioconductor-limma
+    - r-base
+    - r-broom
+    - r-data.table
+    - r-doparallel
+    - r-dplyr
+    - r-foreach
+    - r-futile.logger
+    - r-ggplot2
+    - r-gridextra
+    - r-knitr
+    - r-magrittr
+    - r-mass
+    - r-mefa
+    - r-nls2
+    - 'r-openxlsx >=2.4.0'
+    - r-plyr
+    - r-purrr
+    - r-rcolorbrewer
+    - r-rcurl
+    - r-reshape2
+    - r-rmarkdown
+    - r-sme
+    - r-stringr
+    - r-tidyr
+    - r-venndiagram
+    - r-vgam
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: Artistic-2.0
+  summary: 'Analyze thermal proteome profiling (TPP) experiments with varying temperatures (TR) or compound concentrations (CCR).'
