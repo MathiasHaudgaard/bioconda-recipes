@@ -1,0 +1,59 @@
+{% set version = "1.8.0" %}
+{% set name = "sevenbridges" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name }}/bioconductor-{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: 21f0084badf2476ab13e097a2f93216f6a1cdddf9594c6d7c02719d87d329cca
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-s4vectors
+    - r-base
+    - r-curl
+    - r-docopt
+    - r-dplyr
+    - r-httr
+    - r-jsonlite
+    - r-liftr
+    - 'r-miniui >=0.1.1'
+    - r-objectproperties
+    - 'r-rstudioapi >=0.5'
+    - 'r-shiny >=0.13'
+    - r-stringr
+    - r-uuid
+    - r-yaml
+  run:
+    - bioconductor-s4vectors
+    - r-base
+    - r-curl
+    - r-docopt
+    - r-dplyr
+    - r-httr
+    - r-jsonlite
+    - r-liftr
+    - 'r-miniui >=0.1.1'
+    - r-objectproperties
+    - 'r-rstudioapi >=0.5'
+    - 'r-shiny >=0.13'
+    - r-stringr
+    - r-uuid
+    - r-yaml
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: 'Apache License 2.0 | file LICENSE'
+  summary: 'R client and utilities for Seven Bridges platform API, from Cancer Genomics Cloud to other Seven Bridges supported platforms.'
