@@ -1,0 +1,35 @@
+{% set version = "3.20.0" %}
+{% set name = "muscle" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name }}/bioconductor-{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: 6719aea3300ee5e418ed632794ee317e690f3e1ac436f8a6780a225077e36a9a
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-biostrings
+    - r-base
+    - gcc  # [linux]
+    - llvm  # [osx]
+  run:
+    - bioconductor-biostrings
+    - r-base
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: Unlimited
+  summary: 'MUSCLE performs multiple sequence alignments of nucleotide or amino acid sequences.'
