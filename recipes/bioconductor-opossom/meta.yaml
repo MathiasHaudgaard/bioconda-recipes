@@ -1,0 +1,53 @@
+{% set version = "1.16.0" %}
+{% set name = "oposSOM" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
+  sha256: b2867ffea0b2e0c92463492fe7bceeb5dc0c8d7c3058085f468c77f575e6a5a0
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-biobase
+    - bioconductor-biomart
+    - r-ape
+    - r-arules
+    - r-base
+    - r-fastica
+    - r-fdrtool
+    - 'r-igraph >=1.0.0'
+    - r-pixmap
+    - r-scatterplot3d
+    - r-som
+    - r-tsne
+  run:
+    - bioconductor-biobase
+    - bioconductor-biomart
+    - r-ape
+    - r-arules
+    - r-base
+    - r-fastica
+    - r-fdrtool
+    - 'r-igraph >=1.0.0'
+    - r-pixmap
+    - r-scatterplot3d
+    - r-som
+    - r-tsne
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: 'GPL (>=2)'
+  summary: 'This package translates microarray expression data into metadata of reduced dimension. It provides various sample-centered and group-centered visualizations, sample similarity analyses and functional enrichment analyses. The underlying SOM algorithm combines feature clustering, multidimensional scaling and dimension reduction, along with strong visualization capabilities. It enables extraction and description of functional expression modules inherent in the data.'
