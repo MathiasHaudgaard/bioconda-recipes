@@ -1,0 +1,47 @@
+{% set version = "1.24.0" %}
+{% set name = "REDseq" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
+  sha256: 67f93a9f1ae4a8c65bbd36041563327b9e2c27bd5276e3cd958bb4778c3eadcc
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-annotationdbi
+    - 'bioconductor-biocgenerics >=0.1.0'
+    - bioconductor-biostrings
+    - bioconductor-bsgenome
+    - bioconductor-bsgenome.celegans.ucsc.ce2
+    - bioconductor-chippeakanno
+    - 'bioconductor-iranges >=1.13.5'
+    - bioconductor-multtest
+    - r-base
+  run:
+    - bioconductor-annotationdbi
+    - 'bioconductor-biocgenerics >=0.1.0'
+    - bioconductor-biostrings
+    - bioconductor-bsgenome
+    - bioconductor-bsgenome.celegans.ucsc.ce2
+    - bioconductor-chippeakanno
+    - 'bioconductor-iranges >=1.13.5'
+    - bioconductor-multtest
+    - r-base
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: 'GPL (>=2)'
+  summary: 'The package includes functions to build restriction enzyme cut site (RECS) map, distribute mapped sequences on the map with five different approaches, find enriched/depleted RECSs for a sample, and identify differentially enriched/depleted RECSs between samples.'
