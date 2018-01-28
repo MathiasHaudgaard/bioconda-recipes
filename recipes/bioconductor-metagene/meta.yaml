@@ -1,0 +1,71 @@
+{% set version = "2.10.1" %}
+{% set name = "metagene" %}
+{% set bioc = "3.6" %}
+
+package:
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
+source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name }}/bioconductor-{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: fa9f90f3f2d75d4685aa459f536ccbff70bbc6180271c0034df0a37f9f34f140
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+requirements:
+  build:
+    - bioconductor-biocparallel
+    - bioconductor-dbchip
+    - bioconductor-ensdb.hsapiens.v86
+    - bioconductor-ensembldb
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicalignments
+    - bioconductor-genomicfeatures
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-rtracklayer
+    - r-base
+    - r-data.table
+    - r-ggplot2
+    - r-gplots
+    - r-magrittr
+    - r-matrixstats
+    - r-mustat
+    - r-purrr
+    - 'r-r6 >=2.0'
+    - r-stringr
+  run:
+    - bioconductor-biocparallel
+    - bioconductor-dbchip
+    - bioconductor-ensdb.hsapiens.v86
+    - bioconductor-ensembldb
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicalignments
+    - bioconductor-genomicfeatures
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-rtracklayer
+    - r-base
+    - r-data.table
+    - r-ggplot2
+    - r-gplots
+    - r-magrittr
+    - r-matrixstats
+    - r-mustat
+    - r-purrr
+    - 'r-r6 >=2.0'
+    - r-stringr
+test:
+  commands:
+    - '$R -e "library(''{{ name }}'')"'
+about:
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  license: 'Artistic-2.0 | file LICENSE'
+  summary: 'This package produces metagene plots to compare the behavior of DNA-interacting proteins at selected groups of genes/features. Bam files are used to increase the resolution. Multiple combination of group of bam files and/or group of genomic regions can be compared in a single analysis. Bootstraping analysis is used to compare the groups and locate regions with statistically different enrichment profiles.'
